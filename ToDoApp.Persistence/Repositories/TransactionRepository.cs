@@ -17,9 +17,9 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Repositories
                 .Skip((page - 1) * size).Take(size).AsNoTracking().ToListAsync();
         }
 
-        public Task<int> GetTotalCountofTransactionsForMonth(DateTime date)
+        public async Task<int> GetTotalCountofTransactionsForMonth(DateTime date)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Transactions.CountAsync(x => x.TransactionDate.Month == date.Month && x.TransactionDate.Year == date.Year);
         }
     }
 }

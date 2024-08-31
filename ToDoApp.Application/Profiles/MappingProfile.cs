@@ -5,7 +5,11 @@ using TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.GetAs
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queries.GetPortfolioList;
 using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Commands.CreateTransaction;
+using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Queries.GetTransactionForMonth;
+using TechChallengeGestaoInvestimentos.Application.Profiles;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
+using TechChallengeGestaoInvestimentos.Domain.Enum;
+using Transaction = TechChallengeGestaoInvestimentos.Domain.Entities.Transaction;
 
 namespace TechChallengeGestaoInvestimentos.Application.Profiles
 {
@@ -13,17 +17,25 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
     {
         public MappingProfile()
         {
-            // Mapeamento para Asset
-            CreateMap<Asset, AssetListVm>().ReverseMap();
-            CreateMap<Asset, CreateAssetCommand>().ReverseMap();
-            CreateMap<Asset, UpdateAssetTransactionCommand>().ReverseMap();
+                // Mapeamento para Asset
+                CreateMap<Asset, AssetListVm>().ReverseMap();
+                CreateMap<Asset, CreateAssetCommand>().ReverseMap();
 
-            // Mapeamento para Portfolio
-            CreateMap<Portfolio, CreatePortfolioCommand>().ReverseMap();
-            CreateMap<Portfolio, PortfolioListVm>().ReverseMap();
+                // Atualização de Asset Transaction
+                CreateMap<Asset, UpdateAssetTransactionCommand>().ReverseMap();
 
-            // Mapeamento para Transaction
-            CreateMap<Transaction, CreateTransactionCommand>().ReverseMap();
+                // Mapeamento para Portfolio
+                CreateMap<Portfolio, CreatePortfolioCommand>().ReverseMap();
+                CreateMap<Portfolio, PortfolioListVm>().ReverseMap();
+
+                // Mapeamento para Transaction
+                CreateMap<Transaction, CreateTransactionCommand>().ReverseMap();
+
+                CreateMap<Transaction, TransactionsForMonthDto>();
+
+                CreateMap<UpdateAssetTransactionCommand, Transaction>()
+                    .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.TransactionType == TransactionType.Sale ? 2 : src.Quantity))
+                    .ReverseMap();
         }
     }
 }

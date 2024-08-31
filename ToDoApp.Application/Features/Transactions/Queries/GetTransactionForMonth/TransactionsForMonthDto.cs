@@ -3,7 +3,7 @@
     public class TransactionsForMonthDto
     {
         public Guid Id { get; set; }
-        public int TransactionTotal { get; set; }
-        public DateTime TransactionPlaced { get; set; }
+        public int Quantity { get; set; }
+        public DateTime TransactionDate { get; set; }
     }
 }
