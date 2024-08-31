@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.CreateAsset;
+using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.UpdateAsset;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.GetAssetList;
 
 namespace TechChallengeGestaoInvestimentos.API.Controllers
@@ -32,6 +33,19 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
             var id = await _mediator.Send(createAssetCommand);
 
             return Ok(id);
+        }
+
+        [HttpPut("{id:guid}/transaction", Name = "UpdateAssetTransaction")]
+        public async Task<ActionResult> UpdateTransaction(Guid id, [FromBody] UpdateAssetTransactionCommand updateAssetTransactionCommand)
+        {
+            if (id != updateAssetTransactionCommand.AssetId)
+            {
+                return BadRequest("Asset ID mismatch");
+            }
+
+            await _mediator.Send(updateAssetTransactionCommand);
+
+            return NoContent();
         }
     }
 }
