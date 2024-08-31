@@ -7,10 +7,10 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Transactions.Com
     {
         public Guid PortfolioId { get; set; }
         public Guid AssetId { get; set; }
-        public TransactionType TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; } = TransactionType.Sale;
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
     }
 
 }
