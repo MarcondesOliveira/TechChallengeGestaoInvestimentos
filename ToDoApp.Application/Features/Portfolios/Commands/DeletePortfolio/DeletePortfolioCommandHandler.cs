@@ -8,10 +8,12 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
     public class DeletePortfolioCommandHandler : IRequestHandler<DeletePortfolioCommand>
     {
         private readonly IAsyncRepository<Portfolio> _portfolioRepository;
+        private readonly IAsyncRepository<Asset> _assetRepository;
 
-        public DeletePortfolioCommandHandler(IAsyncRepository<Portfolio> portfolioRepository)
+        public DeletePortfolioCommandHandler(IAsyncRepository<Portfolio> portfolioRepository, IAsyncRepository<Asset> assetRepository)
         {
             _portfolioRepository = portfolioRepository;
+            _assetRepository = assetRepository;
         }
 
         public async Task Handle(DeletePortfolioCommand request, CancellationToken cancellationToken)
@@ -24,7 +26,9 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
             }
 
             // Verificar se existe algum Asset com Status "A" (Ativo) associado ao Portfolio
-            if (portfolio.Assets != null && portfolio.Assets.Any(a => a.Status == "A"))
+            var hasActiveAssets = await _assetRepository.AnyAsync(a => a.PortfolioId == request.PortfolioId && a.Status == "A");
+
+            if (hasActiveAssets)
             {
                 throw new InvalidOperationException("O portfolio não pode ser deletado porque ainda possui ativos.");
             }

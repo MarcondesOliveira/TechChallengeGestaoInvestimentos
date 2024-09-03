@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
 
 namespace TechChallengeGestaoInvestimentos.Persistence.Repositories
@@ -18,6 +19,11 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
 
             return entity;
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbContext.Set<T>().AnyAsync(predicate);
         }
 
         public async Task DeleteAsync(T entity)

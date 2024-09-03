@@ -11,18 +11,27 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
     public class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, Guid>
     {
         private readonly IAsyncRepository<Asset> _assetRepository;
+        private readonly IAsyncRepository<Portfolio> _portfolioRepository;
         private readonly IAsyncRepository<Transaction> _transactionRepository;
         private readonly IMapper _mapper;
 
-        public CreateAssetCommandHandler(IAsyncRepository<Asset> assetRepository, IAsyncRepository<Transaction> transactionRepository, IMapper mapper)
+        public CreateAssetCommandHandler(IAsyncRepository<Asset> assetRepository, IAsyncRepository<Transaction> transactionRepository, IMapper mapper, IAsyncRepository<Portfolio> portfolioRepository)
         {
             _assetRepository = assetRepository;
+            _portfolioRepository = portfolioRepository;
             _transactionRepository = transactionRepository;
             _mapper = mapper;
         }
 
         public async Task<Guid> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
         {
+            // Verificar se o Portfolio está ativo
+            var portfolio = await _portfolioRepository.GetByIdAsync(request.PortfolioId);
+            if (portfolio == null || portfolio.Status != "A")
+            {
+                throw new InvalidOperationException("O ativo não pode ser criado porque o portfólio está inativo ou não existe.");
+            }
+
             // Definir o preço inicial com base no tipo de ativo
             decimal initialPrice = request.AssetType switch
             {
