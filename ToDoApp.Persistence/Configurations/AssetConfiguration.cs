@@ -14,6 +14,7 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Configurations
             builder.Property(a => a.Name).HasColumnType("varchar(100)").IsRequired(false);
             builder.Property(a => a.Code).HasColumnType("varchar(20)").IsRequired();
             builder.Property(a => a.PortfolioId).HasColumnType("uniqueidentifier").IsRequired(false);
+            builder.Property(a => a.Status).HasColumnType("varchar(1)").IsRequired().HasDefaultValue("A"); // Status com valor padrão "A"
 
             builder.HasOne(a => a.User)
                 .WithMany(u => u.Assets)

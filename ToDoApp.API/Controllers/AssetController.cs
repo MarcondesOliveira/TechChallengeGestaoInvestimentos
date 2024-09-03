@@ -24,7 +24,9 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         {
             var result = await _mediator.Send(new GetAssetsListQuery());
 
-            return Ok(result);
+            var activeAssets = result.Where(a => a.Status == "A").ToList();
+
+            return Ok(activeAssets);
         }
 
         [HttpPost(Name = "AddAsset")]

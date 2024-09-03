@@ -2,7 +2,9 @@
 using MediatR;
 using TechChallengeGestaoInvestimentos.Application.Exceptions;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
+using TechChallengeGestaoInvestimentos.Domain.Enum;
 using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
+using Transaction = TechChallengeGestaoInvestimentos.Domain.Entities.Transaction;
 
 namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.UpdateAsset
 {
@@ -21,23 +23,20 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
 
         public async Task Handle(UpdateAssetTransactionCommand request, CancellationToken cancellationToken)
         {
-            // Obter o asset associado
             var asset = await _assetRepository.GetByIdAsync(request.AssetId);
-            if (asset == null)
+            if (asset == null || asset.Status == "I")
             {
                 throw new NotFoundException(nameof(Asset), request.AssetId);
             }
 
-            // Validar se a transação é possível (exemplo: quantidade de venda não excede a quantidade possuída)
-            // Isso pode envolver lógica adicional, como calcular o saldo atual de ativos baseado nas transações passadas
+            request.TransactionType = TransactionType.Sale;
+            request.Quantity = 2;
 
-            // Criar a transação usando o AutoMapper
+            asset.Status = "I";
+            await _assetRepository.UpdateAsync(asset);
+
             var transaction = _mapper.Map<Transaction>(request);
-
-            // Adicionar a nova transação
             await _transactionRepository.AddAsync(transaction);
-
-            // Não há necessidade de atualizar o asset diretamente, já que a lógica de quantidade não é aplicada aqui.
         }
     }
 }

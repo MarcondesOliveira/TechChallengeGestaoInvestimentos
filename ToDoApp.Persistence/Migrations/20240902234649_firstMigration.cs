@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ToDoApp.Persistence.Migrations
+namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class firstMigration : Migration
@@ -47,6 +47,7 @@ namespace ToDoApp.Persistence.Migrations
                     AssetType = table.Column<string>(type: "varchar(50)", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     Code = table.Column<string>(type: "varchar(20)", nullable: false),
+                    Status = table.Column<string>(type: "varchar(1)", nullable: false, defaultValue: "A"),
                     PortfolioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

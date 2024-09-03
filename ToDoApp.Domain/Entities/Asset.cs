@@ -8,6 +8,7 @@ namespace TechChallengeGestaoInvestimentos.Domain.Entities
         public AssetType AssetType { get; set; }
         public string? Name { get; set; }
         public Code Code { get; set; }
+        public string Status { get; set; } = "A";
         public Guid? PortfolioId { get; set; } // Alterado para Guid e nullable
         public Portfolio? Portfolio { get; set; }
         public Guid UserId { get; set; } // Alterado para Guid

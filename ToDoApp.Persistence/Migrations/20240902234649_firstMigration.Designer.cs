@@ -3,18 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechChallengeGestaoInvestimentos.Persistence;
 
-
 #nullable disable
 
-namespace ToDoApp.Persistence.Migrations
+namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
 {
     [DbContext(typeof(TechChallengeGestaoInvestimentosDbContext))]
-    partial class ToDoAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240902234649_firstMigration")]
+    partial class firstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +25,7 @@ namespace ToDoApp.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Asset", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Asset", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,6 +45,12 @@ namespace ToDoApp.Persistence.Migrations
                     b.Property<Guid?>("PortfolioId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(1)")
+                        .HasDefaultValue("A");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -55,7 +63,7 @@ namespace ToDoApp.Persistence.Migrations
                     b.ToTable("Assets");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Portfolio", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Portfolio", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,7 +84,7 @@ namespace ToDoApp.Persistence.Migrations
                     b.ToTable("Portfolios");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Transaction", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +118,7 @@ namespace ToDoApp.Persistence.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.User", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,14 +141,14 @@ namespace ToDoApp.Persistence.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Asset", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Asset", b =>
                 {
-                    b.HasOne("ToDoApp.Domain.Entities.Portfolio", "Portfolio")
+                    b.HasOne("TechChallengeGestaoInvestimentos.Domain.Entities.Portfolio", "Portfolio")
                         .WithMany("Assets")
                         .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("ToDoApp.Domain.Entities.User", "User")
+                    b.HasOne("TechChallengeGestaoInvestimentos.Domain.Entities.User", "User")
                         .WithMany("Assets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -151,15 +159,15 @@ namespace ToDoApp.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Transaction", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Transaction", b =>
                 {
-                    b.HasOne("ToDoApp.Domain.Entities.Asset", "Asset")
+                    b.HasOne("TechChallengeGestaoInvestimentos.Domain.Entities.Asset", "Asset")
                         .WithMany()
                         .HasForeignKey("AssetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ToDoApp.Domain.Entities.Portfolio", "Portfolio")
+                    b.HasOne("TechChallengeGestaoInvestimentos.Domain.Entities.Portfolio", "Portfolio")
                         .WithMany("Transactions")
                         .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -170,14 +178,14 @@ namespace ToDoApp.Persistence.Migrations
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.Portfolio", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.Portfolio", b =>
                 {
                     b.Navigation("Assets");
 
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("ToDoApp.Domain.Entities.User", b =>
+            modelBuilder.Entity("TechChallengeGestaoInvestimentos.Domain.Entities.User", b =>
                 {
                     b.Navigation("Assets");
                 });

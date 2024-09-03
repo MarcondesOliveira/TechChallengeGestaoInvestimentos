@@ -35,6 +35,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
             // Criar o asset
             var asset = _mapper.Map<Asset>(request);
             asset.Id = Guid.NewGuid(); // Criar o ID do asset
+            asset.Status = "A"; // Definir o status como 'A' ao criar
 
             await _assetRepository.AddAsync(asset);
 
