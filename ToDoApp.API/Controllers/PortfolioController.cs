@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio;
+using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.DeletePortfolio;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queries.GetPortfolioList;
 
 namespace TechChallengeGestaoInvestimentos.API.Controllers
@@ -30,6 +31,14 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         {
             var id = await _mediator.Send(createPortfolioCommand);
             return Ok(id);
+        }
+
+        [HttpDelete("{id:guid}", Name = "DeletePortfolio")]
+        public async Task<ActionResult> DeletePortfolio(Guid id)
+        {
+            await _mediator.Send(new DeletePortfolioCommand { PortfolioId = id });
+
+            return NoContent();
         }
     }
 }

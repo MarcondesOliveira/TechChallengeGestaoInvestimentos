@@ -18,7 +18,8 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Description = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Description = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Status = table.Column<string>(type: "varchar(1)", nullable: false, defaultValue: "A")
                 },
                 constraints: table =>
                 {

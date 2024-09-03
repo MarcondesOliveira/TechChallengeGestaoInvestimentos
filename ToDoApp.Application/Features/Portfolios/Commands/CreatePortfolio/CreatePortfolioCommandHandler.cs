@@ -20,6 +20,8 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
         {
             var portfolio = _mapper.Map<Portfolio>(request);
 
+            portfolio.Status = "A";
+
             portfolio.Id = Guid.NewGuid(); // Gera um novo GUID para o Portfolio
             portfolio = await _portfolioRepository.AddAsync(portfolio);
 

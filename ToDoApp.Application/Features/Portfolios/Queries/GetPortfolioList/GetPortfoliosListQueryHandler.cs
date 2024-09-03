@@ -25,5 +25,4 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queri
             return _mapper.Map<List<PortfolioListVm>>(allPortfolios);
         }
     }
-
 }

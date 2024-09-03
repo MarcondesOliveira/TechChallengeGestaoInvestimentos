@@ -73,6 +73,12 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("varchar(1)")
+                        .HasDefaultValue("A");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
