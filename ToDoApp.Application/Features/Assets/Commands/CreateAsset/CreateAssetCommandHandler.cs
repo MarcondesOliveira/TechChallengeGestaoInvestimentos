@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
 using TechChallengeGestaoInvestimentos.Domain.Enum;
 using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
 using Transaction = TechChallengeGestaoInvestimentos.Domain.Entities.Transaction;
-//using Transaction = TechChallengeGestaoInvestimentos.Domain.Entities.Transaction;
 
 namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.CreateAsset
 {
@@ -25,12 +28,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
 
         public async Task<Guid> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
         {
-            // Verificar se o Portfolio está ativo
-            var portfolio = await _portfolioRepository.GetByIdAsync(request.PortfolioId);
-            if (portfolio == null || portfolio.Status != "A")
-            {
-                throw new InvalidOperationException("O ativo não pode ser criado porque o portfólio está inativo ou não existe.");
-            }
+            await new CreateAssetCommandValidator(_portfolioRepository).ValidateAndThrowAsync(request, cancellationToken);
 
             // Definir o preço inicial com base no tipo de ativo
             decimal initialPrice = request.AssetType switch

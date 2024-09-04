@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
 using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
@@ -18,6 +19,14 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
 
         public async Task<Guid> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreatePortfolioCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
             var portfolio = _mapper.Map<Portfolio>(request);
 
             portfolio.Status = "A";
@@ -28,5 +37,4 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
             return portfolio.Id;
         }
     }
-
 }

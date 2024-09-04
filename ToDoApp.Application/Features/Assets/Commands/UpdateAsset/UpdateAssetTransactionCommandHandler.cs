@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using TechChallengeGestaoInvestimentos.Application.Exceptions;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
@@ -23,6 +24,14 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
 
         public async Task Handle(UpdateAssetTransactionCommand request, CancellationToken cancellationToken)
         {
+            var validator = new UpdateAssetTransactionCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
             var asset = await _assetRepository.GetByIdAsync(request.AssetId);
             if (asset == null || asset.Status == "I")
             {
