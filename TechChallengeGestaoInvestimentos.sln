@@ -9,15 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{88A15A9E-B918-442E-8022-D6A5CB8F325C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Domain", "ToDoApp.Domain\TechChallengeGestaoInvestimentos.Domain.csproj", "{D9009A6C-788C-4722-BBD2-3DF11ECE0C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Domain", "TechChallenge.Domain\TechChallengeGestaoInvestimentos.Domain.csproj", "{D9009A6C-788C-4722-BBD2-3DF11ECE0C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Application", "ToDoApp.Application\TechChallengeGestaoInvestimentos.Application.csproj", "{8BA4F494-41E0-48BE-993E-0CA87568FE85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Application", "TechChallenge.Application\TechChallengeGestaoInvestimentos.Application.csproj", "{8BA4F494-41E0-48BE-993E-0CA87568FE85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Infrastructure", "ToDoApp.Infrastructure\TechChallengeGestaoInvestimentos.Infrastructure.csproj", "{55EE742E-3C79-4100-AA33-E7591576D109}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Infrastructure", "TechChallenge.Infrastructure\TechChallengeGestaoInvestimentos.Infrastructure.csproj", "{55EE742E-3C79-4100-AA33-E7591576D109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Persistence", "ToDoApp.Persistence\TechChallengeGestaoInvestimentos.Persistence.csproj", "{DA376AD3-8D45-4E8D-9E4A-30F2991403A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.Persistence", "TechChallenge.Persistence\TechChallengeGestaoInvestimentos.Persistence.csproj", "{DA376AD3-8D45-4E8D-9E4A-30F2991403A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.API", "ToDoApp.API\TechChallengeGestaoInvestimentos.API.csproj", "{D56798C8-3EB5-4690-91A8-7FAE8AAD33D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechChallengeGestaoInvestimentos.API", "TechChallenge.API\TechChallengeGestaoInvestimentos.API.csproj", "{D56798C8-3EB5-4690-91A8-7FAE8AAD33D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
