@@ -2,7 +2,7 @@
 {
     public class AssetListVm
     {
-        public Guid Id { get; set; }
+        public Guid AssetId { get; set; }
         public string? Name { get; set; }
         public string Status { get; set; } = "A";
     }

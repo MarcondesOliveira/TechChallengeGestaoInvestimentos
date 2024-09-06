@@ -34,7 +34,8 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                     Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     Code = table.Column<string>(type: "varchar(20)", nullable: false),
                     Status = table.Column<string>(type: "varchar(1)", nullable: false, defaultValue: "A"),
-                    PortfolioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    PortfolioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

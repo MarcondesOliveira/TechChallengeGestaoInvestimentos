@@ -12,7 +12,7 @@ using TechChallengeGestaoInvestimentos.Identity;
 namespace TechChallengeGestaoInvestimentos.Identity.Migrations
 {
     [DbContext(typeof(TechChallengeIdentityDbContext))]
-    [Migration("20240906025841_firstMigration")]
+    [Migration("20240906032131_firstMigration")]
     partial class firstMigration
     {
         /// <inheritdoc />

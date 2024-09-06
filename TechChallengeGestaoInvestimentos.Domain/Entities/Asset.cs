@@ -14,7 +14,7 @@ namespace TechChallengeGestaoInvestimentos.Domain.Entities
         public string Status { get; set; } = "A";
         public Guid? PortfolioId { get; set; } // Alterado para Guid e nullable
         //public Portfolio? Portfolio { get; set; }
-        //public Guid UserId { get; set; } // Alterado para Guid
+        public Guid UserId { get; set; } // Alterado para Guid
         //public virtual IdentityUser<Guid> User { get; set; }
 
         // Add the following attribute to disable cascade delete

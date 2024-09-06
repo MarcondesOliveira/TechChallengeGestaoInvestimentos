@@ -48,6 +48,9 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                         .HasColumnType("varchar(1)")
                         .HasDefaultValue("A");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("AssetId");
 
                     b.HasIndex("PortfolioId");

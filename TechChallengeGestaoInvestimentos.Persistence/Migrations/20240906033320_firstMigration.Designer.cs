@@ -12,7 +12,7 @@ using TechChallengeGestaoInvestimentos.Persistence;
 namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
 {
     [DbContext(typeof(TechChallengeGestaoInvestimentosDbContext))]
-    [Migration("20240906030600_firstMigration")]
+    [Migration("20240906033320_firstMigration")]
     partial class firstMigration
     {
         /// <inheritdoc />
@@ -50,6 +50,9 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("varchar(1)")
                         .HasDefaultValue("A");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("AssetId");
 

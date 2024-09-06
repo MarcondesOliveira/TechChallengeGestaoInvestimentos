@@ -10,6 +10,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
         public TransactionType TransactionType { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        public Guid UserId { get; set; }
         public DateTime TransactionDate { get; set; }
     }
 }

@@ -51,6 +51,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
             {
                 Id = Guid.NewGuid(),
                 AssetId = asset.AssetId,
+                UserId = asset.UserId,
                 PortfolioId = request.PortfolioId,
                 TransactionType = TransactionType.Buy,
                 Quantity = 1, // Quantidade padrão, pode ser ajustada
