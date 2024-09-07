@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.CreateAsset;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.UpdateAsset;
@@ -20,6 +21,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         [HttpGet(Name = "GetAllAssets")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
+        [Authorize]
         public async Task<ActionResult<List<AssetListVm>>> GetAllAssets()
         {
             var result = await _mediator.Send(new GetAssetsListQuery());

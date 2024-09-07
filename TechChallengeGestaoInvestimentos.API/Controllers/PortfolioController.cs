@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.DeletePortfolio;
@@ -19,6 +20,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
 
         [HttpGet("all", Name = "GetAllPortfolios")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Authorize]
         public async Task<ActionResult<List<PortfolioListVm>>> GetAllPortfolios()
         {
             var portfolios = await _mediator.Send(new GetPortfoliosListQuery());
