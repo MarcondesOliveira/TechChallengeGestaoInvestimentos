@@ -26,9 +26,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Assets\Commands\UpdateAsset\" />
-    <Folder Include="Assets\Queries\" />
-  </ItemGroup>
-
 </Project>
