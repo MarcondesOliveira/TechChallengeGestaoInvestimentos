@@ -32,6 +32,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         }
 
         [HttpPost(Name = "AddAsset")]
+        [Authorize]
         public async Task<ActionResult<int>> Create([FromBody] CreateAssetCommand createAssetCommand)
         {
             var id = await _mediator.Send(createAssetCommand);
@@ -40,6 +41,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         }
 
         [HttpPut("{id:guid}/transaction", Name = "UpdateAssetTransaction")]
+        [Authorize]
         public async Task<ActionResult> UpdateTransaction(Guid id, [FromBody] UpdateAssetTransactionCommand updateAssetTransactionCommand)
         {
             if (id != updateAssetTransactionCommand.AssetId)

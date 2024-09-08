@@ -3,6 +3,7 @@ using FluentAssertions;
 using FluentValidation;
 using Moq;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio;
+using TechChallengeGestaoInvestimentos.Application.Profiles;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
 using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
 
@@ -22,7 +23,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Portfolios.Commands
             // Configurando o AutoMapper
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<CreatePortfolioCommand, Portfolio>();
+                cfg.AddProfile<MappingProfile>();
             });
             _mockMapper = config.CreateMapper();
 
