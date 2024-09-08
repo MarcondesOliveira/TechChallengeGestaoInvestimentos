@@ -5,5 +5,4 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queri
     public class GetPortfoliosListQuery : IRequest<List<PortfolioListVm>>
     {
     }
-
 }
