@@ -17,6 +17,17 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Transactions.Que
 
         public async Task<PagedTransactionsForMonthVm> Handle(GetTransactionsForMonthQuery request, CancellationToken cancellationToken)
         {
+            // Validação para garantir que Page e Size sejam valores positivos
+            if (request.Page <= 0)
+            {
+                throw new ArgumentException("O número da página deve ser maior que zero.", nameof(request.Page));
+            }
+
+            if (request.Size <= 0)
+            {
+                throw new ArgumentException("O tamanho da página deve ser maior que zero.", nameof(request.Size));
+            }
+
             var list = await _transactionRepository.GetPagedTransactionsForMonth(request.Date, request.Page, request.Size);
             var transactions = _mapper.Map<List<TransactionsForMonthDto>>(list);
 

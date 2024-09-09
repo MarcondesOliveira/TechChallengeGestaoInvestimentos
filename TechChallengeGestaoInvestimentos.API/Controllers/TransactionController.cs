@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Commands.CreateTransaction;
 using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Queries.GetTransactionForMonth;
@@ -19,6 +20,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         [HttpGet("/getpagedtransactionsformonth", Name = "GetPagedTransactionsForMonth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
+        [Authorize]
         public async Task<ActionResult<PagedTransactionsForMonthVm>> GetPagedTransactionsForMonth(DateTime date, int page, int size)
         {
             var getTransactionsForMonthQuery = new GetTransactionsForMonthQuery() { Date = date, Page = page, Size = size };
@@ -27,11 +29,11 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
             return Ok(dtos);
         }
 
-        [HttpPost(Name = "AddTransaction")]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateTransactionCommand createTransactionCommand)
-        {
-            var id = await _mediator.Send(createTransactionCommand);
-            return Ok(id);
-        }
+        //[HttpPost(Name = "AddTransaction")]
+        //public async Task<ActionResult<Guid>> Create([FromBody] CreateTransactionCommand createTransactionCommand)
+        //{
+        //    var id = await _mediator.Send(createTransactionCommand);
+        //    return Ok(id);
+        //}
     }
 }
