@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToDoApp.Domain\TechChallengeGestaoInvestimentos.Domain.csproj" />
+    <ProjectReference Include="..\TechChallenge.Domain\TechChallengeGestaoInvestimentos.Domain.csproj" />
   </ItemGroup>
 
 </Project>
