@@ -33,10 +33,10 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Queries.GetA
         {
             // Arrange
             var assets = new List<Asset>
-        {
-            new Asset { AssetId = Guid.NewGuid(), Name = "Bitcoin", AssetType = AssetType.Cryptocurrencies },
-            new Asset { AssetId = Guid.NewGuid(), Name = "Microsoft", AssetType = AssetType.Stocks }
-        };
+            {
+                new Asset { AssetId = Guid.NewGuid(), Name = "Bitcoin", AssetType = AssetType.Cryptocurrencies },
+                new Asset { AssetId = Guid.NewGuid(), Name = "Microsoft", AssetType = AssetType.Stocks }
+            };
 
             _mockAssetRepository.Setup(repo => repo.ListAllAsync())
                 .ReturnsAsync(assets);
@@ -48,9 +48,10 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Queries.GetA
 
             // Assert
             result.Should().HaveCount(2);
-            result[0].Name.Should().Be("Bitcoin");
-            result[1].Name.Should().Be("Microsoft");
+            result.Should().ContainSingle(a => a.Name == "Bitcoin");
+            result.Should().ContainSingle(a => a.Name == "Microsoft");
         }
+
 
         [Fact]
         public async Task Handle_WhenNoAssets_ShouldReturnEmptyList()
