@@ -8,6 +8,6 @@ namespace TechChallengeGestaoInvestimentos.App.Interfaces
     {
         Task<List<PortfolioViewModel>> GetAllPortfolios();
         //Task<List<PortfolioAssetsViewModel>> GetAllCategoriesWithEvents(bool includeHistory);
-        Task<ApiResponse<CreatePortfolioCommand>> CreatePortfolio(PortfolioViewModel portfolioViewModel);
+        Task<ApiResponse<PortfolioDto>> CreatePortfolio(PortfolioViewModel portfolioViewModel);
     }
 }

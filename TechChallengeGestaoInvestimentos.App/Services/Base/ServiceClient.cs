@@ -36,12 +36,12 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> AddAssetAsync(CreateAssetCommand body);
+        System.Threading.Tasks.Task<System.Guid> AddAssetAsync(CreateAssetCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<int> AddAssetAsync(CreateAssetCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> AddAssetAsync(CreateAssetCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -63,12 +63,12 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> AddPortfolioAsync(CreatePortfolioCommand body);
+        System.Threading.Tasks.Task<CreatePortfolioCommandResponse> AddPortfolioAsync(CreatePortfolioCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> AddPortfolioAsync(CreatePortfolioCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<CreatePortfolioCommandResponse> AddPortfolioAsync(CreatePortfolioCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -144,12 +144,12 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        //System.Threading.Tasks.Task<TwoFactorResponse> 2faAsync(TwoFactorRequest body);
+        // System.Threading.Tasks.Task<TwoFactorResponse> 2faAsync(TwoFactorRequest body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        //System.Threading.Tasks.Task<TwoFactorResponse> 2faAsync(TwoFactorRequest body, System.Threading.CancellationToken cancellationToken);
+        // System.Threading.Tasks.Task<TwoFactorResponse> 2faAsync(TwoFactorRequest body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -321,7 +321,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<int> AddAssetAsync(CreateAssetCommand body)
+        public virtual System.Threading.Tasks.Task<System.Guid> AddAssetAsync(CreateAssetCommand body)
         {
             return AddAssetAsync(body, System.Threading.CancellationToken.None);
         }
@@ -329,7 +329,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<int> AddAssetAsync(CreateAssetCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> AddAssetAsync(CreateAssetCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -374,7 +374,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -562,7 +562,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Guid> AddPortfolioAsync(CreatePortfolioCommand body)
+        public virtual System.Threading.Tasks.Task<CreatePortfolioCommandResponse> AddPortfolioAsync(CreatePortfolioCommand body)
         {
             return AddPortfolioAsync(body, System.Threading.CancellationToken.None);
         }
@@ -570,7 +570,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Guid> AddPortfolioAsync(CreatePortfolioCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CreatePortfolioCommandResponse> AddPortfolioAsync(CreatePortfolioCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -615,7 +615,7 @@ namespace TechChallengeGestaoInvestimentos.App.Services
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<CreatePortfolioCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1965,6 +1965,54 @@ namespace TechChallengeGestaoInvestimentos.App.Services
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string Description { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CreatePortfolioCommandResponse
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("success")]
+        public bool Success { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("validationErrors")]
+        public System.Collections.Generic.ICollection<string> ValidationErrors { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("portfolio")]
+        public CreatePortfolioDto Portfolio { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("portfolioId")]
+        public System.Guid PortfolioId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CreatePortfolioDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("portfolioId")]
+        public System.Guid PortfolioId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
+
+    }
+        
+    public partial class PortfolioDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+        public System.Guid Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]
+        public string Name { get; set; }
 
     }
 

@@ -30,10 +30,10 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
 
         [HttpPost(Name = "AddPortfolio")]
         [Authorize]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreatePortfolioCommand createPortfolioCommand)
+        public async Task<ActionResult<CreatePortfolioCommandResponse>> Create([FromBody] CreatePortfolioCommand createPortfolioCommand)
         {
-            var id = await _mediator.Send(createPortfolioCommand);
-            return Ok(id);
+            var response = await _mediator.Send(createPortfolioCommand);
+            return Ok(response);
         }
 
         [HttpDelete("{id:guid}", Name = "DeletePortfolio")]

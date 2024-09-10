@@ -3,7 +3,7 @@ using TechChallengeGestaoInvestimentos.App.ViewModels;
 
 namespace TechChallengeGestaoInvestimentos.App.Interfaces
 {
-    public interface IEventDataService
+    public interface IAssetDataService
     {
         Task<List<AssetListViewModel>> GetAllAssets();
         Task<ApiResponse<Guid>> CreateAsset(AssetDetailViewModel assetDetailViewModel);

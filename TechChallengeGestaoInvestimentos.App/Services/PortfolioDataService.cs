@@ -14,9 +14,32 @@ namespace TechChallengeGestaoInvestimentos.App.Services
             _mapper = mapper;
         }
 
-        public Task<ApiResponse<CreatePortfolioCommand>> CreatePortfolio(PortfolioViewModel portfolioViewModel)
+        public async Task<ApiResponse<PortfolioDto>> CreatePortfolio(PortfolioViewModel portfolioViewModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ApiResponse<PortfolioDto> apiResponse = new ApiResponse<PortfolioDto>();
+                CreatePortfolioCommand createPortfolioCommand = _mapper.Map<CreatePortfolioCommand>(portfolioViewModel);
+                var createPortfolioCommandResponse = await _client.AddPortfolioAsync(createPortfolioCommand);
+                if (createPortfolioCommandResponse.Success)
+                {
+                    apiResponse.Data = _mapper.Map<PortfolioDto>(createPortfolioCommandResponse.Portfolio);
+                    apiResponse.Success = true;
+                }
+                else
+                {
+                    apiResponse.Data = null;
+                    foreach (var error in createPortfolioCommandResponse.ValidationErrors)
+                    {
+                        apiResponse.ValidationErrors += error + Environment.NewLine;
+                    }
+                }
+                return apiResponse;
+            }
+            catch (ApiException ex)
+            {
+                return ConvertApiExceptions<PortfolioDto>(ex);
+            }
         }
 
         public async Task<List<PortfolioViewModel>> GetAllPortfolios()

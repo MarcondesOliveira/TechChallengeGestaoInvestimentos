@@ -28,6 +28,9 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
             CreateMap<Portfolio, CreatePortfolioCommand>().ReverseMap();
             CreateMap<Portfolio, PortfolioListVm>().ReverseMap();
 
+            // Novo mapeamento para CreatePortfolioDto
+            CreateMap<Portfolio, CreatePortfolioDto>();
+
             CreateMap<DeletePortfolioCommand, Portfolio>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => "I"));
 
@@ -41,4 +44,5 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
                 .ReverseMap();
         }
     }
+
 }
