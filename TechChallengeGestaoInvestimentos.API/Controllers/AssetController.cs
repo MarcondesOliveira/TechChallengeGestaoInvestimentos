@@ -33,7 +33,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
 
         [HttpPost(Name = "AddAsset")]
         [Authorize]
-        public async Task<ActionResult<int>> Create([FromBody] CreateAssetCommand createAssetCommand)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateAssetCommand createAssetCommand)
         {
             var id = await _mediator.Send(createAssetCommand);
 

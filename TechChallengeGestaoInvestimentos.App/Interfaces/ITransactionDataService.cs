@@ -4,6 +4,6 @@ namespace TechChallengeGestaoInvestimentos.App.Interfaces
 {
     public interface ITransactionDataService
     {
-        Task<PagedOrderForMonthViewModel> GetPagedOrderForMonth(DateTime date, int page, int size);
+        Task<PagedTransactionForMonthViewModel> GetPagedTransactionForMonth(DateTime date, int page, int size);
     }
 }

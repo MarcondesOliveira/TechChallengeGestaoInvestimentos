@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
+using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text.Json;
 using TechChallengeGestaoInvestimentos.App.Services.Base;

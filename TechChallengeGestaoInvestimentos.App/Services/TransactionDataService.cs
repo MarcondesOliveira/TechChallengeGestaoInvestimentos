@@ -14,12 +14,12 @@ namespace TechChallengeGestaoInvestimentos.App.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedOrderForMonthViewModel> GetPagedOrderForMonth(DateTime date, int page, int size)
+        public async Task<PagedTransactionForMonthViewModel> GetPagedTransactionForMonth(DateTime date, int page, int size)
         {
             var transactions = await _client.GetPagedTransactionsForMonthAsync(date, page, size);
-            var mappedOrders = _mapper.Map<PagedOrderForMonthViewModel>(transactions);
+            var mappedTransactions = _mapper.Map<PagedTransactionForMonthViewModel>(transactions);
 
-            return mappedOrders;
+            return mappedTransactions;
         }
     }
 }
