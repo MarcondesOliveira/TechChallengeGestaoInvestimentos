@@ -4,7 +4,6 @@
 
 <div class="m-2 d-flex justify-content-end">
     <button @onclick="AddNewAsset" class="me-1">Add asset</button>
-    @* <button @onclick="ExportEvents">Export events</button> *@
 </div>
 
 
@@ -20,7 +19,7 @@ else
             <tr>
                 <th></th>
                 <th>Assets name</th>
-                @* <th>Assets date</th> *@
+                <th>Assets date</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,9 +28,9 @@ else
             {
                 <tr>
                     <td class="event-name">@ev.Name </td>
-                    <td class="event-date">@ev.Status </td>
+                    <td class="event-date">@ev.Date.ToShortDateString() </td>
                     <td>
-                        <a href="@($"assetsdetails/{ev.AssetId}")" class="event-purchase-button btn">
+                        <a href="@($"assetdetails/{ev.AssetId}")" class="event-purchase-button btn">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </td>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class firstMigrationPersistence : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,9 +32,10 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                     AssetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AssetType = table.Column<string>(type: "varchar(50)", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
                     Code = table.Column<string>(type: "varchar(20)", nullable: false),
                     Status = table.Column<string>(type: "varchar(1)", nullable: false, defaultValue: "A"),
-                    PortfolioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PortfolioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -44,7 +45,8 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                         name: "FK_Assets_Portfolios_PortfolioId",
                         column: x => x.PortfolioId,
                         principalTable: "Portfolios",
-                        principalColumn: "PortfolioId");
+                        principalColumn: "PortfolioId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

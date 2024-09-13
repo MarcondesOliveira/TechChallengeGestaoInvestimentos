@@ -15,28 +15,10 @@ namespace TechChallengeGestaoInvestimentos.AppWebAssembly.Services
             _mapper = mapper;
         }
 
-        //public async Task<ApiResponse<Guid>> CreateAsset(AssetDetailViewModel assetDetailViewModel)
-        //{
-        //    try
-        //    {
-        //        // Mapeando a ViewModel para o CreateAssetCommand
-        //        var createAssetCommand = _mapper.Map<CreateAssetCommand>(assetDetailViewModel);
-        //        // Usando o cliente gerado pelo NSwag para chamar a API
-        //        var newId = await _client.AddAssetAsync(createAssetCommand);
-
-        //        return new ApiResponse<Guid> { Data = newId, Success = true };
-        //    }
-        //    catch (ApiException ex)
-        //    {
-        //        return ConvertApiExceptions<Guid>(ex);
-        //    }
-        //}
-
         public async Task<ApiResponse<Guid>> CreateAsset(AssetDetailViewModel assetDetailViewModel)
         {
             try
-            {
-                
+            {                
                 CreateAssetCommand createAssetCommand = _mapper.Map<CreateAssetCommand>(assetDetailViewModel);
                 
                 var newId = await _client.AddAssetAsync(createAssetCommand);
@@ -52,12 +34,16 @@ namespace TechChallengeGestaoInvestimentos.AppWebAssembly.Services
 
         public async Task<List<AssetListViewModel>> GetAllAssets()
         {
-            // Chamando o método gerado pelo NSwag para obter todos os assets
             var allAssets = await _client.GetAllAssetsAsync();
-            // Mapeando os assets retornados para a ViewModel
             var mappedAssets = _mapper.Map<ICollection<AssetListViewModel>>(allAssets);
-
             return mappedAssets.ToList();
+        }
+
+        public async Task<AssetDetailViewModel> GetAssetById(Guid id)
+        {
+            var selectedAsset = await _client.GetAssetByIdAsync(id);
+            var mappedEvent = _mapper.Map<AssetDetailViewModel>(selectedAsset);
+            return mappedEvent;
         }
 
         public async Task<ApiResponse<Guid>> UpdateAsset(AssetDetailViewModel assetDetailViewModel)

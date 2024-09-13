@@ -10,7 +10,7 @@ namespace TechChallengeGestaoInvestimentos.AppWebAssembly.Profiles
         {
             //Vms are coming in from the API, ViewModel are the local entities in Blazor
             CreateMap<AssetListVm, AssetListViewModel>().ReverseMap();
-            //CreateMap<AssetDetailVm, AssetDetailViewModel>().ReverseMap();
+            CreateMap<AssetDetailVm, AssetDetailViewModel>().ReverseMap();
 
             CreateMap<AssetDetailViewModel, CreateAssetCommand>().ReverseMap();
             CreateMap<AssetDetailViewModel, UpdateAssetTransactionCommand>().ReverseMap();

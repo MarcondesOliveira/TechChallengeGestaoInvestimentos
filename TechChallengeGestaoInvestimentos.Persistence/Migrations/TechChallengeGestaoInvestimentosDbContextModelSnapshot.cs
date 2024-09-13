@@ -36,10 +36,13 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Name")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<Guid?>("PortfolioId")
+                    b.Property<Guid>("PortfolioId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")
@@ -121,7 +124,9 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
                 {
                     b.HasOne("TechChallengeGestaoInvestimentos.Domain.Entities.Portfolio", "Portfolio")
                         .WithMany("Assets")
-                        .HasForeignKey("PortfolioId");
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Portfolio");
                 });

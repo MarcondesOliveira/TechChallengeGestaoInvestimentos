@@ -1,5 +1,60 @@
-﻿<h3>AssetDetails</h3>
+﻿@page "/assetdetails"
+@page "/assetdetails/{assetid}"
 
-@code {
+<h1 class="page-title">Details for @AssetDetailViewModel.Name</h1>
 
-}
+@Message
+
+<EditForm Model="@AssetDetailViewModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary></ValidationSummary>
+
+    <div class="row mb-3">
+        <label for="name" class="col-sm-3 form-label">Asset name: </label>
+        <div class="col-sm-8">
+            <InputText id="name" class="form-control" @bind-Value="@AssetDetailViewModel.Name" placeholder="Enter asset name"></InputText>
+            <ValidationMessage For="@(() => AssetDetailViewModel.Name)" />
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <label for="type" class="col-sm-3 form-label">Asset tipo: </label>
+        <div class="col-sm-8">
+            <InputText id="assetType" class="form-control" @bind-Value="@AssetDetailViewModel.AssetType" placeholder="Enter AssetType"></InputText>
+            <ValidationMessage For="@(() => AssetDetailViewModel.AssetType)" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="date" class="col-sm-3 form-label">Asset date: </label>
+        <div class="col-sm-8">
+            <InputDate id="date" class="form-control" @bind-Value="@AssetDetailViewModel.Date"></InputDate>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="code" class="col-sm-3 form-label">Asset code: </label>
+        <div class="col-sm-8">
+            <InputTextArea id="code" class="form-control" @bind-Value="@AssetDetailViewModel.Code" placeholder="Enter code"></InputTextArea>
+            <ValidationMessage For="@(() => AssetDetailViewModel.Code)" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="portfolio" class="col-sm-3 form-label">Portfolio: </label>
+        <div class="col-sm-8">
+            <InputSelect id="portfolioId" class="form-control" @bind-Value="@SelectedPortfolioId">
+                @foreach (var portfolio in Portfolios)
+                {
+                    <option value="@portfolio.PortfolioId">@portfolio.Name</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <button type="submit" class="submit-button">Save asset</button>
+
+</EditForm>
+
+<br />
+<p class="back-to-catalog mt-3"><img src="img/back-arrow.svg" /><a @onclick="@NavigateToOverview">Back to overview</a></p>

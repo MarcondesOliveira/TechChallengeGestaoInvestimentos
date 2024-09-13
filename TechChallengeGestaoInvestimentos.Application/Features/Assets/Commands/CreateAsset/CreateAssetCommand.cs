@@ -7,6 +7,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
     {
         public AssetType AssetType { get; set; }
         public string? Name { get; set; }
+        public DateTime Date { get; set; }
         public Code Code { get; set; }
         public Guid UserId { get; set; }
         public Guid PortfolioId { get; set; } = default!;
