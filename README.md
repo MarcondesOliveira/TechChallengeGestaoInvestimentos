@@ -146,7 +146,7 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 - O Client em Blazor irá interpretar os valores com a descrição de forma que possa ser selecionado de acordo com o nome/tipo do ativo e o nome/tipo do Codigo <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
 
 ## Consulta ao banco
-**Como fazer consulta dos registro no banco de dados**
+**Como fazer consulta dos registros no banco de dados**
 - Eu usei o Microsoft SQL Server Management com as seguintes configurações:
 ![ConsultaSQL](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/develop/Documentation/consultasql.png)
    
