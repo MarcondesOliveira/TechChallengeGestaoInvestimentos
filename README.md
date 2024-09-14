@@ -46,25 +46,30 @@
 Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 
 **Configuração**
-- Num terminal digite: git clone https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos.git
-- cd TechChallengeGestaoInvestimentos
-- git checkout develop
-- dotnet restore
-- dotnet build
+- Num terminal digite: 
+
+      git clone https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos.git
+      cd TechChallengeGestaoInvestimentos
+      git checkout develop
+      dotnet restore
+      dotnet build
 - Com o Docker Desktop em execução digite o comando para criar o banco pelo docker:
-    - docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<S3Nh4F0rT3>" -p 1433:1433 --name sqlserver-tech5 -h sqlserver-tech5 -d mcr.microsoft.com/mssql/server:2019-latest
+    
+      docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<S3Nh4F0rT3>" -p 1433:1433 --name sqlserver-tech5 -h sqlserver-tech5 -d mcr.microsoft.com/mssql/server:2019-latest
 - Abra a Solution no Visual Studio 2022 e habilite o projeto API como principal:
 ![StartupProject](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/startupproject.png)
 - Abra o Package Manager Console:
 ![PackageManagerConsole](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/packagemanagerconsole.png)
 - Em Default Project selecione o **Identity** e rode os comandos:
 ![Identity](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/identity.png)
-    - Add-Migration firstMigration -Context TechChallengeIdentityDbContext
-    - Update-Database -Context TechChallengeIdentityDbContext
+    
+        Add-Migration firstMigration -Context TechChallengeIdentityDbContext
+        Update-Database -Context TechChallengeIdentityDbContext
 - Ainda em Default Project selecione o **Persistence** e rode os comandos:
 ![Persistence](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/persistence.png)
-    - Add-Migration firstMigrationPersistence -Context TechChallengeGestaoInvestimentosDbContext
-    - Update-Database -Context TechChallengeGestaoInvestimentosDbContext
+        
+        Add-Migration firstMigrationPersistence -Context TechChallengeGestaoInvestimentosDbContext
+        Update-Database -Context TechChallengeGestaoInvestimentosDbContext
 
 
 ## Roteiro de uso da Api
