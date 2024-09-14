@@ -67,6 +67,80 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
     - Update-Database -Context TechChallengeGestaoInvestimentosDbContext
 
 
+## Roteiro de uso da Api
+**Autenticação**
+    - Para usar o sistema, é necessário estar logado
+
+        - Criar usuário
+        - Fazer login
+**Gestão de Portfólios e Ativos**
+    - Portfólio
+
+        - Criar portfólio
+        - Um portfólio só pode ser deletado se não houver ativos associados ainda não vendidos (Status 'A').
+        - O portfólio muda de status para 'I' (inativo) após a venda de todos os ativos.
+**Ativo**
+    - Criar ativo
+
+    - Ao criar um ativo, uma transação de compra é criada e o ativo recebe o status 'A'.
+    - Um ativo só pode ser consultado se ainda não tiver sido vendido.
+    - Ao editar um ativo, uma transação de venda é criada e o status muda para 'I'.
+**Transações Automáticas**
+
+    - Ao criar um ativo, uma transação de compra é criada automaticamente com a quantidade definida como 1.
+    - Ao editar um ativo, uma transação de venda é criada automaticamente com a quantidade definida como 2.
+
+
+## Exemplo de payloads
+**Criar Portfólio**
+
+    {
+      "name": "Ações deletar 2",
+      "description": "Portfólio de ações"
+    }
+
+**Criar Ativo**
+
+    {
+      "assetType": 3,
+      "name": "Bitcoin Teste",
+      "date": "2024-09-13T23:43:08.000Z",
+      "code": 2,
+      "userId": "1b5aac07-9a85-48a7-b306-6be333b24f00",
+      "portfolioId": "A92B11F1-F0B7-486A-A895-8DC9B7B47803"
+    }
+
+**Atualizar Ativo**
+
+    {
+      "assetId": "78A752FE-B72D-4355-B548-8E63FF8CED07",
+      "portfolioId": "A92B11F1-F0B7-486A-A895-8DC9B7B47803",
+      "price": 25000,
+      "userId": "8E37846A-2D17-45F1-AB74-E46792FBEF3C",
+      "transactionDate": "2024-09-14T00:12:03.768Z"
+    }
+
+**Consultar Transações**
+
+    {
+      "date": "2024-09-14",
+      "page": 1,
+      "size": 10
+    }
+
+## Valoes válidos para AssetType e Code
+**AssetType**
+
+    1 = Stocks (Ações)
+    2 = Bonds (Títulos)
+    3 = Cryptocurrencies (Criptomoedas)
+
+**Code**
+
+    1 = AAPL (Apple)
+    2 = BTC (Bitcoin)
+
+- O Client em Blazor irá interpretar os valores com a descrição de forma que possa ser selecionado de acordo com o nome/tipo do ativo e o nome/tipo do Codigo <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
 ## License
 
 MIT
