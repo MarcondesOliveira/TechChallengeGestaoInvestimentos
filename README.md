@@ -111,7 +111,6 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
       "name": "Bitcoin Teste",
       "date": "2024-09-13T23:43:08.000Z",
       "code": 2,
-      "userId": "1b5aac07-9a85-48a7-b306-6be333b24f00",
       "portfolioId": "A92B11F1-F0B7-486A-A895-8DC9B7B47803"
     }
 
@@ -121,7 +120,6 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
       "assetId": "78A752FE-B72D-4355-B548-8E63FF8CED07",
       "portfolioId": "A92B11F1-F0B7-486A-A895-8DC9B7B47803",
       "price": 25000,
-      "userId": "8E37846A-2D17-45F1-AB74-E46792FBEF3C",
       "transactionDate": "2024-09-14T00:12:03.768Z"
     }
 
@@ -146,6 +144,14 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
     2 = BTC (Bitcoin)
 
 - O Client em Blazor irá interpretar os valores com a descrição de forma que possa ser selecionado de acordo com o nome/tipo do ativo e o nome/tipo do Codigo <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
+
+## Consulta ao banco
+**Como fazer consulta dos registro no banco de dados**
+    - Eu usei o Microsoft SQL Server Management com as seguintes configurações:
+![ConsultaSQL](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/consultasql.png)
+    - Mas qualquer Gerenciador de banco de dados poder ser utilizado
+
+
 ## License
 
 MIT

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
@@ -17,18 +19,28 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
         private readonly IAsyncRepository<Portfolio> _portfolioRepository;
         private readonly IAsyncRepository<Transaction> _transactionRepository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CreateAssetCommandHandler(IAsyncRepository<Asset> assetRepository, IAsyncRepository<Transaction> transactionRepository, IMapper mapper, IAsyncRepository<Portfolio> portfolioRepository)
+        public CreateAssetCommandHandler(IAsyncRepository<Asset> assetRepository, IAsyncRepository<Transaction> transactionRepository, IMapper mapper, IAsyncRepository<Portfolio> portfolioRepository, IHttpContextAccessor httpContextAccessor)
         {
             _assetRepository = assetRepository;
             _portfolioRepository = portfolioRepository;
             _transactionRepository = transactionRepository;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Guid> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
         {
             await new CreateAssetCommandValidator(_portfolioRepository).ValidateAndThrowAsync(request, cancellationToken);
+
+            // Obter o UserId do usuário logado
+            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                throw new UnauthorizedAccessException("Usuário não autenticado.");
+            }
+            var userId = Guid.Parse(userIdClaim.Value);
 
             // Definir o preço inicial com base no tipo de ativo
             decimal initialPrice = request.AssetType switch
@@ -42,6 +54,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
             // Criar o asset
             var asset = _mapper.Map<Asset>(request);
             asset.AssetId = Guid.NewGuid(); // Criar o ID do asset
+            asset.UserId = userId;
             asset.Status = "A"; // Definir o status como 'A' ao criar
 
             await _assetRepository.AddAsync(asset);

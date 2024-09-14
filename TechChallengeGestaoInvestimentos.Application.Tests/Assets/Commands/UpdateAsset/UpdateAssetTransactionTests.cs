@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Moq;
+using System.Security.Claims;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.UpdateAsset;
 using TechChallengeGestaoInvestimentos.Application.Profiles;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
@@ -14,20 +16,26 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Upd
         private readonly Mock<IAsyncRepository<Asset>> _mockAssetRepository;
         private readonly Mock<IAsyncRepository<Transaction>> _mockTransactionRepository;
         private readonly IMapper _mapper;
+        private readonly Mock<IHttpContextAccessor> _mockHttpContextAccessor;
         private readonly UpdateAssetTransactionCommandHandler _handler;
 
         public UpdateAssetTransactionTests()
         {
             _mockAssetRepository = new Mock<IAsyncRepository<Asset>>();
             _mockTransactionRepository = new Mock<IAsyncRepository<Transaction>>();
+            _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
 
             var configurationProvider = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<MappingProfile>(); 
+                cfg.AddProfile<MappingProfile>();
             });
             _mapper = configurationProvider.CreateMapper();
-                        
-            _handler = new UpdateAssetTransactionCommandHandler(_mapper, _mockAssetRepository.Object, _mockTransactionRepository.Object);
+
+            _handler = new UpdateAssetTransactionCommandHandler(
+                _mapper,
+                _mockAssetRepository.Object,
+                _mockTransactionRepository.Object,
+                _mockHttpContextAccessor.Object);
         }
 
         [Fact]
@@ -35,10 +43,18 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Upd
         {
             // Arrange
             var assetId = Guid.NewGuid();
+            var userId = Guid.NewGuid(); // Simular um UserId válido
+
+            // Configurar o mock do IHttpContextAccessor para retornar o UserId simulado
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+            }));
+            _mockHttpContextAccessor.Setup(x => x.HttpContext.User).Returns(user);
+
             var request = new UpdateAssetTransactionCommand
             {
                 AssetId = assetId,
-                UserId = Guid.NewGuid(),
                 PortfolioId = Guid.NewGuid(),
                 TransactionType = TransactionType.Buy,
                 Price = 1000m,
