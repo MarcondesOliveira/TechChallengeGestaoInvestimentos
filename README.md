@@ -1,20 +1,31 @@
-# Tech Challenger - Gestão de Investimentos
-## _The Last Markdown Editor, Ever_
+# Tech Challenge - Gestão de Investimentos
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+<div style="text-align: center;">
+  <img src="https://img.shields.io/badge/.NET%208-333333?style=flat&logo=.net&logoColor=white" alt=".NET 8" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoftsqlserver&logoColor=white" alt="SQL Server" />
+  <img src="https://img.shields.io/badge/Entity%20Framework-5C2D91?style=flat&logo=dotnet&logoColor=white" alt="Entity Framework" />
+  <img src="https://img.shields.io/badge/MediatR-004B87?style=flat&logo=dotnet&logoColor=white" alt="MediatR" />
+  <img src="https://img.shields.io/badge/Identity-0078D4?style=flat&logo=microsoft&logoColor=white" alt="Identity" />
+  <img src="https://img.shields.io/badge/JWT%20Bearer-000000?style=flat&logo=json-web-tokens&logoColor=white" alt="JwtBearer" />
+  <img src="https://img.shields.io/badge/FluentValidation-6ABBD0?style=flat&logo=dotnet&logoColor=white" alt="FluentValidation" />
+  <img src="https://img.shields.io/badge/AutoMapper-003B57?style=flat&logo=dotnet&logoColor=white" alt="AutoMapper" />
+  <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
+</div>
 
 **Tech Challenger** é uma aplicação de gestão de investimentos baseada na Clean Architecture, desenvolvida com .NET 8. A aplicação utiliza Docker, SQL Server, Entity Framework, MediatR, Identity, JwtBearer, FluentValidation e AutoMapper para fornecer uma solução robusta e escalável para o gerenciamento de portfólios de investimentos.
 
 ## Funcionalidades
 
-- Gestão de Portfólios e Ativos: Crie, edite e visualize portfólios e ativos.
-- Transações: Registre transações de compra e venda de ativos.
+- Gestão de Portfólios e Ativos: Cria, edita e visualiza portfólios e ativos.
+- Transações: Registra transações de compra e venda de ativos.
 - Autenticação e Autorização: Proteje a aplicação com autenticação JWT.
-- Validação de Dados: Valide dados de entrada usando FluentValidation.
-- Mapeamento Automático: Utilize AutoMapper para mapear entre DTOs e entidades.
-- API RESTful: Exponha endpoints para interação com clientes e outros sistemas.
+- Validação de Dados: Valida dados de entrada usando FluentValidation.
+- Mapeamento Automático: Utiliza AutoMapper para mapear entre DTOs e entidades.
+- API RESTful: Exponhe endpoints para interação com clientes e outros sistemas.
+
+## Diagrama DDD
+
  
 ## Tecnologias
 
