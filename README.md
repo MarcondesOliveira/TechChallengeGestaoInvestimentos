@@ -147,11 +147,10 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 
 ## Consulta ao banco
 **Como fazer consulta dos registro no banco de dados**
-    - Eu usei o Microsoft SQL Server Management com as seguintes configurações:
-
-    ![ConsultaSQL](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/develop/Documentation/consultasql.png)
-    
-    - Mas qualquer Gerenciador de banco de dados poder ser utilizado
+- Eu usei o Microsoft SQL Server Management com as seguintes configurações:
+![ConsultaSQL](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/develop/Documentation/consultasql.png)
+   
+- Mas qualquer Gerenciador de banco de dados poder ser utilizado
 
 
 ## License
