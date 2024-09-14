@@ -12,7 +12,7 @@ using TechChallengeGestaoInvestimentos.Persistence;
 namespace TechChallengeGestaoInvestimentos.Persistence.Migrations
 {
     [DbContext(typeof(TechChallengeGestaoInvestimentosDbContext))]
-    [Migration("20240913001803_firstMigrationPersistence")]
+    [Migration("20240914181959_firstMigrationPersistence")]
     partial class firstMigrationPersistence
     {
         /// <inheritdoc />
