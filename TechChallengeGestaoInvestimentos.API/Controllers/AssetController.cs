@@ -32,12 +32,12 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}", Name = "GetAssetById")]
-        public async Task<ActionResult<AssetDetailVm>> GetAssetById(Guid id)
-        {
-            var getAssetDetailQuery = new GetAssetDetailQuery() { Id = id };
-            return Ok(await _mediator.Send(getAssetDetailQuery));
-        }
+        //[HttpGet("{id}", Name = "GetAssetById")]
+        //public async Task<ActionResult<AssetDetailVm>> GetAssetById(Guid id)
+        //{
+        //    var getAssetDetailQuery = new GetAssetDetailQuery() { Id = id };
+        //    return Ok(await _mediator.Send(getAssetDetailQuery));
+        //}
 
         [HttpPost(Name = "AddAsset")]
         [Authorize]

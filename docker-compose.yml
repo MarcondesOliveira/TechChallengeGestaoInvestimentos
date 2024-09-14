@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver-tech5
+    hostname: sqlserver-tech5
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=<S3Nh4F0rT3>
+    ports:
+      - "1433:1433"
+    networks:
+      - tech-challenger-network
+
+  app:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    build:
+      context: .
+      dockerfile: C:\Workspace\FIAP\05 - Tech Challenge\TechChallengeGestaoInvestimentos\TechChallengeGestaoInvestimentos.API\Dockerfile
+    depends_on:
+      - sqlserver
+    networks:
+      - tech-challenger-network
+    entrypoint: ["/bin/sh", "-c", "dotnet ef migrations add firstMigration -c TechChallengeIdentityDbContext && dotnet ef database update -c TechChallengeIdentityDbContext && dotnet ef migrations add firstMigrationPersistence -c TechChallengeGestaoInvestimentosDbContext && dotnet ef database update -c TechChallengeGestaoInvestimentosDbContext && dotnet run"]
+
+networks:
+  tech-challenger-network:
+    driver: bridge
+
+
+
+  # C:\Workspace\FIAP\05 - Tech Challenge\TechChallengeGestaoInvestimentos\TechChallengeGestaoInvestimentos.API\Dockerfile
