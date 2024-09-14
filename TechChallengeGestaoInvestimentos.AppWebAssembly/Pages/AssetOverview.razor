@@ -1,0 +1,42 @@
+﻿@page "/assetoverview"
+
+<h3>Assets Overview</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="AddNewAsset" class="me-1">Add asset</button>
+</div>
+
+
+
+@if (Assets == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Assets name</th>
+                <th>Assets date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Assets)
+            {
+                <tr>
+                    <td class="event-name">@ev.Name </td>
+                    <td class="event-date">@ev.Date.ToShortDateString() </td>
+                    <td>
+                        <a href="@($"assetdetails/{ev.AssetId}")" class="event-purchase-button btn">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
