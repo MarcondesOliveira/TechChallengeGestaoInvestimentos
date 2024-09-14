@@ -26,6 +26,7 @@
 
 ## Diagrama DDD
 
+![DDD](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/DDD.png)
  
 ## Tecnologias
 
