@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
 </div>
 
-**Tech Challenger** é uma aplicação de gestão de investimentos baseada na Clean Architecture, desenvolvida com .NET 8. A aplicação utiliza Docker, SQL Server, Entity Framework, MediatR, Identity, JwtBearer, FluentValidation e AutoMapper para fornecer uma solução robusta e escalável para o gerenciamento de portfólios de investimentos.
+**Tech Challenge** é uma aplicação de gestão de investimentos baseada na Clean Architecture, desenvolvida com .NET 8. A aplicação utiliza Docker, SQL Server, Entity Framework, MediatR, Identity, JwtBearer, FluentValidation e AutoMapper para fornecer uma solução robusta e escalável para o gerenciamento de portfólios de investimentos.
 
 ## Funcionalidades
 
@@ -54,11 +54,15 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 - Com o Docker Desktop em execução digite o comando para criar o banco pelo docker:
     - docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=<S3Nh4F0rT3>" -p 1433:1433 --name sqlserver-tech5 -h sqlserver-tech5 -d mcr.microsoft.com/mssql/server:2019-latest
 - Abra a Solution no Visual Studio 2022 e habilite o projeto API como principal:
+![StartupProject](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/startupproject.png)
 - Abra o Package Manager Console:
+![PackageManagerConsole](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/packagemanagerconsole.png)
 - Em Default Project selecione o **Identity** e rode os comandos:
+![Identity](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/identity.png)
     - Add-Migration firstMigration -Context TechChallengeIdentityDbContext
     - Update-Database -Context TechChallengeIdentityDbContext
 - Ainda em Default Project selecione o **Persistence** e rode os comandos:
+![Persistence](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/blazor-app-modificado/Documentation/persistence.png)
     - Add-Migration firstMigrationPersistence -Context TechChallengeGestaoInvestimentosDbContext
     - Update-Database -Context TechChallengeGestaoInvestimentosDbContext
 

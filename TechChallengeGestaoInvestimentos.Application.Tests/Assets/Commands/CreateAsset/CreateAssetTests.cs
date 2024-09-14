@@ -36,13 +36,16 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
         {
             // Arrange
             var portfolioId = Guid.NewGuid();
+            var currentDate = DateTime.UtcNow.AddDays(1); // Data no futuro para satisfazer a validação
+
             var createCommand = new CreateAssetCommand
             {
                 Name = "Bitcoin",
                 Code = Code.BTC,
                 AssetType = AssetType.Stocks,
                 UserId = Guid.NewGuid(),
-                PortfolioId = portfolioId
+                PortfolioId = portfolioId,
+                Date = currentDate // Adiciona a data válida ao comando
             };
 
             var mappedAsset = new Asset
@@ -63,10 +66,10 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
             };
 
             _mockMapper.Setup(m => m.Map<Asset>(It.IsAny<CreateAssetCommand>()))
-                .Returns(mappedAsset); 
+                .Returns(mappedAsset);
 
             _mockAssetRepository.Setup(repo => repo.AddAsync(It.IsAny<Asset>()))
-                .ReturnsAsync(mappedAsset); 
+                .ReturnsAsync(mappedAsset);
 
             _mockTransactionRepository.Setup(repo => repo.AddAsync(It.IsAny<Transaction>()))
                 .ReturnsAsync((Transaction t) => t);
@@ -84,6 +87,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
             _mockTransactionRepository.Verify(repo => repo.AddAsync(It.IsAny<Transaction>()), Times.Once);
             _mockPortfolioRepository.Verify(repo => repo.GetByIdAsync(It.IsAny<Guid>()), Times.Once);
         }
+
 
         [Fact]
         public async Task Handle_InvalidAssetType_ShouldThrowValidationException()
