@@ -83,7 +83,7 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 
         - Criar portfólio
         - Um portfólio só pode ser deletado se não houver ativos associados ainda não vendidos (Status 'A').
-        - O portfólio muda de status para 'I' (inativo) após a venda de todos os ativos.
+        - O portfólio muda de status para 'I' (inativo) após deletar.
 **Ativo**
     - Criar ativo
 
