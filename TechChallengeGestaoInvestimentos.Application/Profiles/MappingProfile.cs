@@ -18,35 +18,6 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
     {
         public MappingProfile()
         {
-            //// Mapeamento para Asset
-            //CreateMap<Asset, AssetListVm>().ReverseMap();
-            //CreateMap<Asset, CreateAssetCommand>().ReverseMap();
-
-            //// Atualização de Asset Transaction
-            //CreateMap<Asset, UpdateAssetTransactionCommand>().ReverseMap();
-
-            //// Mapeamento para Portfolio
-            //CreateMap<Portfolio, CreatePortfolioCommand>().ReverseMap();
-            //CreateMap<Portfolio, PortfolioListVm>().ReverseMap();
-
-            //CreateMap<Portfolio, PortfolioAssetListVm>().ReverseMap();
-
-            //// Novo mapeamento para CreatePortfolioDto
-            //CreateMap<Portfolio, CreatePortfolioDto>();
-
-            //CreateMap<DeletePortfolioCommand, Portfolio>()
-            //    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => "I"));
-
-            //// Mapeamento para Transaction
-            //CreateMap<Transaction, CreateTransactionCommand>().ReverseMap();
-
-            //CreateMap<Transaction, TransactionsForMonthDto>();
-
-            //CreateMap<UpdateAssetTransactionCommand, Transaction>()
-            //    .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.TransactionType == TransactionType.Sale ? 2 : src.Quantity))
-            //    .ReverseMap();
-            // Mapeamento para Asset
-            // Mapeamento para Asset
             CreateMap<Asset, AssetListVm>().ReverseMap();
             CreateMap<Asset, CreateAssetCommand>().ReverseMap();
             CreateMap<Asset, PortfolioAssetDto>().ReverseMap();  // Adicionando mapeamento para PortfolioAssetDto
