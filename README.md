@@ -144,6 +144,7 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
     2 = BTC (Bitcoin)
 
 - O Client em Blazor irá interpretar os valores com a descrição de forma que possa ser selecionado de acordo com o nome/tipo do ativo e o nome/tipo do Codigo <img src="https://img.shields.io/badge/status-in_development-yellow" alt="Em Desenvolvimento" />
+- **Obs.:** Para evitar erro de build no inicio do processo ou nas migrations, [Desligue, descarregue ou dê unload] no projeto Blazor em Presentation.
 
 ## Consulta ao banco
 **Como fazer consulta dos registros no banco de dados**
@@ -151,7 +152,6 @@ Certifique-se de ter o Docker e o .NET 8 instalados em seu sistema.
 ![ConsultaSQL](https://github.com/MarcondesOliveira/TechChallengeGestaoInvestimentos/blob/develop/Documentation/consultasql.png)
    
 - Mas qualquer Gerenciador de banco de dados poder ser utilizado
-
 
 ## License
 
