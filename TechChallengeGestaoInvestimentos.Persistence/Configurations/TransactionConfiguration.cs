@@ -20,14 +20,6 @@ namespace TechChallengeGestaoInvestimentos.Persistence.Configurations
             builder.Property(t => t.Quantity).HasColumnType("int").IsRequired();
             builder.Property(t => t.Price).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(t => t.TransactionDate).HasColumnType("datetime").IsRequired();
-
-            //builder.HasOne(t => t.Portfolio)
-            //    .WithMany(p => p.Transactions)
-            //    .HasForeignKey(t => t.PortfolioId);
-
-            //builder.HasOne(t => t.Asset)
-            //    .WithMany()
-            //    .HasForeignKey(t => t.AssetId);
         }
     }
 }

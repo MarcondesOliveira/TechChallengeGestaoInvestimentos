@@ -5,6 +5,7 @@ using TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.GetAs
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.DeletePortfolio;
 using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queries.GetPortfolioList;
+using TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Queries.GetPortfoliosListWithAssets;
 using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Commands.CreateTransaction;
 using TechChallengeGestaoInvestimentos.Application.Features.Transactions.Queries.GetTransactionForMonth;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
@@ -17,9 +18,9 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
     {
         public MappingProfile()
         {
-            // Mapeamento para Asset
             CreateMap<Asset, AssetListVm>().ReverseMap();
             CreateMap<Asset, CreateAssetCommand>().ReverseMap();
+            CreateMap<Asset, PortfolioAssetDto>().ReverseMap();  // Adicionando mapeamento para PortfolioAssetDto
 
             // Atualização de Asset Transaction
             CreateMap<Asset, UpdateAssetTransactionCommand>().ReverseMap();
@@ -27,6 +28,13 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
             // Mapeamento para Portfolio
             CreateMap<Portfolio, CreatePortfolioCommand>().ReverseMap();
             CreateMap<Portfolio, PortfolioListVm>().ReverseMap();
+
+            CreateMap<Portfolio, PortfolioAssetListVm>()
+                .ForMember(dest => dest.Assets, opt => opt.MapFrom(src => src.Assets)) // Mapeando Assets
+                .ForMember(dest => dest.PortfolioId, opt => opt.MapFrom(src => src.PortfolioId)); // Certifique-se que CategoryId está mapeado corretamente
+
+            // Novo mapeamento para CreatePortfolioDto
+            CreateMap<Portfolio, CreatePortfolioDto>();
 
             CreateMap<DeletePortfolioCommand, Portfolio>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => "I"));
@@ -41,4 +49,5 @@ namespace TechChallengeGestaoInvestimentos.Application.Profiles
                 .ReverseMap();
         }
     }
+
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.CreateAsset;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.UpdateAsset;
+using TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.GetAssetDetail;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.GetAssetList;
 
 namespace TechChallengeGestaoInvestimentos.API.Controllers
@@ -26,14 +27,21 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
         {
             var result = await _mediator.Send(new GetAssetsListQuery());
 
-            var activeAssets = result.Where(a => a.Status == "A").ToList();
+            
 
-            return Ok(activeAssets);
+            return Ok(result);
         }
+
+        //[HttpGet("{id}", Name = "GetAssetById")]
+        //public async Task<ActionResult<AssetDetailVm>> GetAssetById(Guid id)
+        //{
+        //    var getAssetDetailQuery = new GetAssetDetailQuery() { Id = id };
+        //    return Ok(await _mediator.Send(getAssetDetailQuery));
+        //}
 
         [HttpPost(Name = "AddAsset")]
         [Authorize]
-        public async Task<ActionResult<int>> Create([FromBody] CreateAssetCommand createAssetCommand)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateAssetCommand createAssetCommand)
         {
             var id = await _mediator.Send(createAssetCommand);
 

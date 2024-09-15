@@ -17,7 +17,7 @@ namespace TechChallengeGestaoInvestimentos.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("/getpagedtransactionsformonth", Name = "GetPagedTransactionsForMonth")]
+        [HttpGet("paged", Name = "GetPagedTransactionsForMonth")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         [Authorize]

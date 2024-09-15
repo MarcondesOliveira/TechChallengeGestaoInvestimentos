@@ -18,6 +18,11 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.
 
             RuleFor(x => x.AssetType)
                 .IsInEnum().WithMessage("Tipo de ativo inválido.");
+
+            RuleFor(p => p.Date)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull()
+                .GreaterThan(DateTime.Now);
         }
 
         private async Task<bool> ValidatePortfolioExistsAndActive(Guid portfolioId, CancellationToken cancellationToken)

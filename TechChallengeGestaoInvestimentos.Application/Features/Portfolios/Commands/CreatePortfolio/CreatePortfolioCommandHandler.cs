@@ -6,7 +6,7 @@ using TechChallengeGestaoInvestimentos.Domain.Interfaces.Persistence;
 
 namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Commands.CreatePortfolio
 {
-    public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioCommand, Guid>
+    public class CreatePortfolioCommandHandler : IRequestHandler<CreatePortfolioCommand, CreatePortfolioCommandResponse>
     {
         private readonly IAsyncRepository<Portfolio> _portfolioRepository;
         private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
             _mapper = mapper;
         }
 
-        public async Task<Guid> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
+        public async Task<CreatePortfolioCommandResponse> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
         {
             var validator = new CreatePortfolioCommandValidator();
             var validationResult = await validator.ValidateAsync(request);
@@ -34,7 +34,18 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Portfolios.Comma
             portfolio.PortfolioId = Guid.NewGuid(); // Gera um novo GUID para o Portfolio
             portfolio = await _portfolioRepository.AddAsync(portfolio);
 
-            return (Guid)portfolio.PortfolioId;
+            var response = new CreatePortfolioCommandResponse
+            {
+
+                Portfolio = new CreatePortfolioDto
+                {
+                    Name = request.Name,
+                    PortfolioId = (Guid)portfolio.PortfolioId
+                },
+                PortfolioId = (Guid)portfolio.PortfolioId
+            };
+
+            return response;
         }
     }
 }

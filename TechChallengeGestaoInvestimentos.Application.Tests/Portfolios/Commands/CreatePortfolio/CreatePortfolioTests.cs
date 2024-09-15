@@ -40,14 +40,17 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Portfolios.Commands
                 Description = "Portfolio de criptomoedas."
             };
 
+            var portfolioId = Guid.NewGuid();
+
             _mockPortfolioRepository.Setup(repo => repo.AddAsync(It.IsAny<Portfolio>()))
-                .ReturnsAsync((Portfolio portfolio) => portfolio);
+                .ReturnsAsync(new Portfolio { PortfolioId = portfolioId, Name = "Cripto", Status = "A" });
 
             // Act
-            var result = await _handler.Handle(command, CancellationToken.None);
+            var response = await _handler.Handle(command, CancellationToken.None);
 
             // Assert
-            result.Should().NotBeEmpty();
+            response.Should().NotBeNull();
+            response.PortfolioId.Should().Be(portfolioId);
             _mockPortfolioRepository.Verify(repo => repo.AddAsync(It.IsAny<Portfolio>()), Times.Once);
         }
 

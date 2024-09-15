@@ -25,6 +25,16 @@ namespace TechChallengeGestaoInvestimentos.API
 
             builder.Services.AddControllers();
 
+            builder.Services.AddCors(
+                options => options.AddPolicy(
+                    "open",
+                    policy => policy.WithOrigins([builder.Configuration["ApiUrl"] ?? "https://localhost:7081",
+                        builder.Configuration["BlazorUrl"] ?? "https://localhost:7080"])
+            .AllowAnyMethod()
+            .SetIsOriginAllowed(pol => true)
+            .AllowAnyHeader()
+            .AllowCredentials()));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

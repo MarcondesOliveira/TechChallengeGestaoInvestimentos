@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Moq;
+using System.Security.Claims;
 using TechChallengeGestaoInvestimentos.Application.Features.Assets.Commands.CreateAsset;
 using TechChallengeGestaoInvestimentos.Domain.Entities;
 using TechChallengeGestaoInvestimentos.Domain.Enum;
@@ -15,6 +17,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
         private readonly Mock<IAsyncRepository<Transaction>> _mockTransactionRepository;
         private readonly Mock<IAsyncRepository<Portfolio>> _mockPortfolioRepository;
         private readonly Mock<IMapper> _mockMapper;
+        private readonly Mock<IHttpContextAccessor> _mockHttpContextAccessor;
         private readonly CreateAssetCommandHandler _handler;
 
         public CreateAssetTests()
@@ -23,12 +26,14 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
             _mockTransactionRepository = new Mock<IAsyncRepository<Transaction>>();
             _mockPortfolioRepository = new Mock<IAsyncRepository<Portfolio>>();
             _mockMapper = new Mock<IMapper>();
+            _mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
 
             _handler = new CreateAssetCommandHandler(
                 _mockAssetRepository.Object,
                 _mockTransactionRepository.Object,
                 _mockMapper.Object,
-                _mockPortfolioRepository.Object);
+                _mockPortfolioRepository.Object,
+                _mockHttpContextAccessor.Object);
         }
 
         [Fact]
@@ -36,13 +41,23 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
         {
             // Arrange
             var portfolioId = Guid.NewGuid();
+            var currentDate = DateTime.UtcNow.AddDays(1); // Data no futuro para satisfazer a validação
+            var userId = Guid.NewGuid(); // Simular um UserId válido
+
+            // Configurar o mock do IHttpContextAccessor para retornar o UserId simulado
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+            }));
+            _mockHttpContextAccessor.Setup(x => x.HttpContext.User).Returns(user);
+
             var createCommand = new CreateAssetCommand
             {
                 Name = "Bitcoin",
                 Code = Code.BTC,
                 AssetType = AssetType.Stocks,
-                UserId = Guid.NewGuid(),
-                PortfolioId = portfolioId
+                PortfolioId = portfolioId,
+                Date = currentDate // Adiciona a data válida ao comando
             };
 
             var mappedAsset = new Asset
@@ -50,7 +65,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
                 AssetId = Guid.NewGuid(),
                 Name = createCommand.Name,
                 Code = createCommand.Code,
-                UserId = createCommand.UserId,
+                UserId = userId, // O UserId agora é obtido do contexto
                 PortfolioId = createCommand.PortfolioId,
                 Status = "A"
             };
@@ -63,10 +78,10 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
             };
 
             _mockMapper.Setup(m => m.Map<Asset>(It.IsAny<CreateAssetCommand>()))
-                .Returns(mappedAsset); 
+                .Returns(mappedAsset);
 
             _mockAssetRepository.Setup(repo => repo.AddAsync(It.IsAny<Asset>()))
-                .ReturnsAsync(mappedAsset); 
+                .ReturnsAsync(mappedAsset);
 
             _mockTransactionRepository.Setup(repo => repo.AddAsync(It.IsAny<Transaction>()))
                 .ReturnsAsync((Transaction t) => t);
@@ -94,7 +109,6 @@ namespace TechChallengeGestaoInvestimentos.Application.Tests.Assets.Commands.Cre
                 Name = "Bitcoin",
                 Code = Code.BTC,
                 AssetType = (AssetType)99, // Tipo de ativo inválido
-                UserId = Guid.NewGuid(),
                 PortfolioId = Guid.NewGuid()
             };
 

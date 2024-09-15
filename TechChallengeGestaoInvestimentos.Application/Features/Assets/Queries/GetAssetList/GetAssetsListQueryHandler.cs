@@ -18,7 +18,7 @@ namespace TechChallengeGestaoInvestimentos.Application.Features.Assets.Queries.G
 
         public async Task<List<AssetListVm>> Handle(GetAssetsListQuery request, CancellationToken cancellationToken)
         {
-            var allAssets = (await _assetRepository.ListAllAsync()).OrderBy(x => x.AssetId);
+            var allAssets = (await _assetRepository.ListAllAsync()).Where(x => x.Status == "A").OrderBy(x => x.Date);
 
             return _mapper.Map<List<AssetListVm>>(allAssets);
         }
